@@ -36,6 +36,6 @@ public class JWTRefresherTest {
         JWTToken token = signer.sign(claimStore);
         Thread.sleep(10);
         JWTToken refreshedToken = refresher.refresh(token);
-        assertNotEquals(token.getValue(), refreshedToken.getValue());
+        assertNotEquals(token.getBase64EncodedValue(), refreshedToken.getBase64EncodedValue());
     }
 }

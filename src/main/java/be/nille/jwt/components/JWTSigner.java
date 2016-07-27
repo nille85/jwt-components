@@ -32,8 +32,8 @@ public class JWTSigner {
         claimStore.addClaim(expirationClaim);
         ClaimConverter converter = new ClaimConverter();
         Map<String,Object> claimMap = converter.toClaimMap(claimStore);
-        String signedValue = signer.sign(claimMap);
-        JWTToken token = new JWTToken(signedValue);
+        String base64EncodedValue = signer.sign(claimMap);
+        JWTToken token = new JWTToken(base64EncodedValue);
         return token;
     }
     

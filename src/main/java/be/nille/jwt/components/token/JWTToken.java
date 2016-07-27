@@ -6,6 +6,8 @@
 package be.nille.jwt.components.token;
 
 
+import be.nille.jwt.components.claim.JWTClaim;
+import be.nille.jwt.components.claim.JWTClaimStore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +19,18 @@ import lombok.Setter;
 @Setter(AccessLevel.PACKAGE)
 public class JWTToken {
     
-    private String value;
+    private String base64EncodedValue;
     
-    public JWTToken(final String value){
-        this.value = value;
+    public JWTToken(final String base64EncodedValue){
+        this.base64EncodedValue = base64EncodedValue;
     }
+    
+    /*
+    public containsClaim(JWTClaim claim){
+        JWTClaimStore claimStore = tokenVerifier.verify(this);
+        JWTClaim retrievedClaim = claimStore.getClaim(claim.getName());
+        return claim.getValue().equals(retrievedClaim.getValue());
+    }
+    */
 
 }

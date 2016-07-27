@@ -26,7 +26,7 @@ public class JWTVerifier {
     
     public JWTClaimStore verify(final JWTToken token){
         try {
-            String tokenValue = token.getValue();
+            String tokenValue = token.getBase64EncodedValue();
             Map<String, Object> claims = verifier.verify(tokenValue);
             checkExpiryDate(claims);
             ClaimConverter converter = new ClaimConverter();

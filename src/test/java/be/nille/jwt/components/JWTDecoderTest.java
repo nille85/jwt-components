@@ -47,7 +47,7 @@ public class JWTDecoderTest {
         store.addClaim(claim2);
         JWTSigner signer = new JWTSigner("asecret");
         JWTToken token = signer.sign(store);
-        String tokenToDecode = token.getValue();
+        String tokenToDecode = token.getBase64EncodedValue();
         JWTClaimStore claimStore = decoder.decode(tokenToDecode);
         assertTrue(claimStore.getClaims().size() == 3);
     }

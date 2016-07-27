@@ -5,7 +5,6 @@
  */
 package be.nille.jwt.components.token;
 
-import be.nille.jwt.components.token.JWTToken;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ public class JWTTokenTest {
     @Test
     public void create(){
         JWTToken token = new JWTToken("tokenvalue");
-        assertEquals("tokenvalue",token.getValue());
+        assertEquals("tokenvalue",token.getBase64EncodedValue());
     }
 
 }

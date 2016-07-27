@@ -36,7 +36,7 @@ public class JWTSignerTest {
         claimStore.addClaim(claim2);
         JWTToken token = signer.sign(claimStore);
         assertNotNull(token);
-        log.debug(token.getValue());
+        log.debug(token.getBase64EncodedValue());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class JWTSignerTest {
         JWTToken token1 = signer.sign(claimStore);
         Thread.sleep(10);
         JWTToken token2 = signer.sign(claimStore);
-        assertNotEquals(token1.getValue(), token2.getValue());
+        assertNotEquals(token1.getBase64EncodedValue(), token2.getBase64EncodedValue());
     }
 
 }
