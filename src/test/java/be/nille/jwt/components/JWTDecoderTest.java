@@ -21,6 +21,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -29,8 +31,15 @@ import org.junit.Test;
 @Slf4j
 public class JWTDecoderTest {
     
+    private JWTDecoder decoder;
+    
+    @Before
+    public void setup(){
+        decoder = new JWTDecoder();
+    }
+    
     @Test
-    public void decode() throws UnsupportedEncodingException{
+    public void decode(){
         JWTClaimStore store = new JWTClaimStore();
         JWTClaim claim1 = new JWTClaim("iss", "Nille");
         store.addClaim(claim1);
@@ -38,50 +47,19 @@ public class JWTDecoderTest {
         store.addClaim(claim2);
         JWTSigner signer = new JWTSigner("asecret");
         JWTToken token = signer.sign(store);
-        Base64 decoder = new Base64(true);
-        log.debug(token.getValue());
-        
-        String[] tokenParts = token.getValue().split("\\.");
-        log.debug("length:" + tokenParts.length);
-        for(String part : tokenParts){
-            log.debug(part);
-        }
-        
-        /*
-        final String jsontring = new String(decoder.decode(token.getValue()), "UTF-8");
-     
-       
-        Gson gson = new Gson();
-        JsonReader reader = new JsonReader(new StringReader(jsonString));
-        reader.setLenient(true);
-        JsonObject json = gson.fromJson(reader, JsonObject.class);
-        for(Map.Entry<String,JsonElement> entry : json.entrySet()){
-            log.debug(entry.getKey() + ":" + entry.getValue());
-        }
-                */
+        String tokenToDecode = token.getValue();
+        JWTClaimStore claimStore = decoder.decode(tokenToDecode);
+        assertTrue(claimStore.getClaims().size() == 3);
     }
     
-    public void catchGroupsWithRegex(String jsonString){
-        
-        String pattern = "(\\{.*?\\})(\\{.*\\})(.*)";
-
-        // Create a Pattern object
-        Pattern r = Pattern.compile(pattern);
-
-        // Now create matcher object.
-        Matcher m = r.matcher(jsonString);
-        
-        System.out.println(m.matches());
-
-        
-        if (m.find()) {
-            System.out.println("Found value: " + m.group(1));
-            System.out.println("Found value: " + m.group(2));
-            System.out.println("Found value: " + m.group(3));
-        } else {
-            System.out.println("NO MATCH");
-        }
-             
+    @Test(expected = InvalidJWTException.class)
+    public void decodeWithInvalidToken(){
+        decoder.decode("klmsdfklm.lmslmsdfmlsdf");
+    }
+    
+    @Test(expected = InvalidJWTException.class)
+    public void decodeWithInvalidTokenForGson(){
+        decoder.decode("klmsdfklm.lmslmsdfmlsdf.klmsdlm");
     }
 
 }

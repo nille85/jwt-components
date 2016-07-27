@@ -32,7 +32,7 @@ public class JWTVerifier {
             ClaimConverter converter = new ClaimConverter();
             return converter.toJWTClaimStore(claims);
         } catch (IOException | GeneralSecurityException | JWTVerifyException | RuntimeException ex) {
-            throw new InvalidJWTTokenException("Token could not be verified:" + ex.getMessage());
+            throw new InvalidJWTException("Token could not be verified:" + ex.getMessage());
         }
         
     }
@@ -41,7 +41,7 @@ public class JWTVerifier {
         Long expiryDate = (Long) claims.get("exp");
             Calendar cal = Calendar.getInstance();
             if (cal.getTimeInMillis() > expiryDate) {
-                throw new ExpiredJWTTokenException("Token has expired");
+                throw new ExpiredJWTException("Token has expired");
             }
     }
     

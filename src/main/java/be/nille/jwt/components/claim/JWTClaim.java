@@ -21,7 +21,7 @@ public class JWTClaim {
     public JWTClaim(final String name, final Object value) {
         this.name = name;
         this.value = value;
-        log.debug("Create JWT claim with name:" + name + " and value " + this.value);
+        log.debug("Create JWT claim with name " + name + " and value " + this.value);
     }
 
 }

@@ -8,10 +8,10 @@ package be.nille.jwt.components;
 /**
  * @author nholvoet
  */
-public class InvalidJWTTokenException extends RuntimeException {
+public class InvalidAPIUsageException extends RuntimeException {
 
-    public InvalidJWTTokenException(final String message) {
-        super(message);
+    public InvalidAPIUsageException(final String message, final Throwable throwable) {
+        super(message, throwable);
     }
 
 }

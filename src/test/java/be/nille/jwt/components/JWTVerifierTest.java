@@ -38,13 +38,13 @@ public class JWTVerifierTest {
        
     }
     
-    @Test(expected = InvalidJWTTokenException.class )
+    @Test(expected = InvalidJWTException.class )
     public void testVerifyTokensThrowsInvalidTokenException(){
         JWTToken token = new JWTToken("klmsdlmdfs.lmdkfd.klmsdflm");
         verifier.verify(token);
     }
     
-    @Test(expected = InvalidJWTTokenException.class )
+    @Test(expected = InvalidJWTException.class )
     public void verifyWhenSignedWithOtherSecret(){
         JWTClaimStore store = new JWTClaimStore();
         JWTClaim claim1 = new JWTClaim("iss", "Nille");

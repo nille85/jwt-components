@@ -8,10 +8,14 @@ package be.nille.jwt.components;
 /**
  * @author nholvoet
  */
-public class ExpiredJWTTokenException extends RuntimeException {
+public class InvalidJWTException extends RuntimeException {
 
-    public ExpiredJWTTokenException(final String message) {
+    public InvalidJWTException(final String message) {
         super(message);
+    }
+    
+    public InvalidJWTException(final String message, final Throwable throwable) {
+        super(message, throwable);
     }
 
 }
