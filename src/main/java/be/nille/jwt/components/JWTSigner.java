@@ -5,7 +5,7 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import be.nille.jwt.components.claim.JWTClaim;
 import be.nille.jwt.components.claim.JWTClaimStore;
 import java.util.Map;
@@ -27,13 +27,13 @@ public class JWTSigner {
         minutesValid = DEFAULT_MINUTES_VALID;
     }
     
-    public JWTToken sign(final JWTClaimStore claimStore) {
+    public JWT sign(final JWTClaimStore claimStore) {
         JWTClaim expirationClaim = createExpirationClaim();
         claimStore.addClaim(expirationClaim);
         ClaimConverter converter = new ClaimConverter();
         Map<String,Object> claimMap = converter.toClaimMap(claimStore);
         String base64EncodedValue = signer.sign(claimMap);
-        JWTToken token = new JWTToken(base64EncodedValue);
+        JWT token = new JWT(base64EncodedValue);
         return token;
     }
     

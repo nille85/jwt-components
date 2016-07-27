@@ -11,12 +11,12 @@ import org.junit.Test;
 /**
  * @author nholvoet
  */
-public class JWTTokenTest {
+public class JWTTest {
     
     @Test
     public void create(){
-        JWTToken token = new JWTToken("tokenvalue");
-        assertEquals("tokenvalue",token.getBase64EncodedValue());
+        JWT jwt = new JWT("tokenvalue");
+        assertEquals("tokenvalue",jwt.getBase64EncodedValue());
     }
 
 }

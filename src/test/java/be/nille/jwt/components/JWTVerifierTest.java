@@ -7,7 +7,7 @@ package be.nille.jwt.components;
 
 import be.nille.jwt.components.claim.JWTClaim;
 import be.nille.jwt.components.claim.JWTClaimStore;
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class JWTVerifierTest {
         JWTClaim claim2 = new JWTClaim("sub", "Token");
         store.addClaim(claim2);
         JWTSigner signer = new JWTSigner("asecret");
-        JWTToken token = signer.sign(store);
+        JWT token = signer.sign(store);
         JWTClaimStore verifiedStore = verifier.verify(token);
         assertTrue(verifiedStore.getClaims().size() == 3);
        
@@ -40,7 +40,7 @@ public class JWTVerifierTest {
     
     @Test(expected = InvalidJWTException.class )
     public void testVerifyTokensThrowsInvalidTokenException(){
-        JWTToken token = new JWTToken("klmsdlmdfs.lmdkfd.klmsdflm");
+        JWT token = new JWT("klmsdlmdfs.lmdkfd.klmsdflm");
         verifier.verify(token);
     }
     
@@ -52,7 +52,7 @@ public class JWTVerifierTest {
         JWTClaim claim2 = new JWTClaim("sub", "Token");
         store.addClaim(claim2);
         JWTSigner signer = new JWTSigner("password");
-        JWTToken token = signer.sign(store);
+        JWT token = signer.sign(store);
         verifier.verify(token);
     }
 }

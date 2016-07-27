@@ -10,7 +10,7 @@ import be.nille.jwt.components.JWTClaimChecker;
 import be.nille.jwt.components.claim.JWTClaim;
 import be.nille.jwt.components.claim.JWTClaimStore;
 import be.nille.jwt.components.claim.UnexistingJWTClaimException;
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -37,7 +37,7 @@ public class JWTClaimCheckerTest {
         store.addClaim(claim2);
         JWTClaim claimToRetrieve = new JWTClaim("sub", "Token");
         JWTSigner signer = new JWTSigner("asecret");
-        JWTToken token = signer.sign(store);
+        JWT token = signer.sign(store);
         assertTrue(checker.tokenContainsClaim(token, claimToRetrieve));
     }
 
@@ -50,7 +50,7 @@ public class JWTClaimCheckerTest {
         store.addClaim(claim2);
         JWTClaim claimToRetrieve = new JWTClaim("sub", "Cookie");
         JWTSigner signer = new JWTSigner("asecret");
-        JWTToken token = signer.sign(store);
+        JWT token = signer.sign(store);
         assertFalse(checker.tokenContainsClaim(token, claimToRetrieve));
     }
 
@@ -63,7 +63,7 @@ public class JWTClaimCheckerTest {
         store.addClaim(claim2);
         JWTClaim claimToRetrieve = new JWTClaim("scope", "read");
         JWTSigner signer = new JWTSigner("asecret");
-        JWTToken token = signer.sign(store);
+        JWT token = signer.sign(store);
         assertFalse(checker.tokenContainsClaim(token, claimToRetrieve));
     }
 

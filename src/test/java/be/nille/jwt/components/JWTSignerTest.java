@@ -7,7 +7,7 @@ package be.nille.jwt.components;
 
 import be.nille.jwt.components.claim.JWTClaim;
 import be.nille.jwt.components.claim.JWTClaimStore;
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import lombok.extern.slf4j.Slf4j;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -34,7 +34,7 @@ public class JWTSignerTest {
         claimStore.addClaim(claim1);
         JWTClaim claim2 = new JWTClaim("sub", "Token");
         claimStore.addClaim(claim2);
-        JWTToken token = signer.sign(claimStore);
+        JWT token = signer.sign(claimStore);
         assertNotNull(token);
         log.debug(token.getBase64EncodedValue());
     }
@@ -46,9 +46,9 @@ public class JWTSignerTest {
         claimStore.addClaim(claim1);
         JWTClaim claim2 = new JWTClaim("sub", "Token");
         claimStore.addClaim(claim2);
-        JWTToken token1 = signer.sign(claimStore);
+        JWT token1 = signer.sign(claimStore);
         Thread.sleep(10);
-        JWTToken token2 = signer.sign(claimStore);
+        JWT token2 = signer.sign(claimStore);
         assertNotEquals(token1.getBase64EncodedValue(), token2.getBase64EncodedValue());
     }
 

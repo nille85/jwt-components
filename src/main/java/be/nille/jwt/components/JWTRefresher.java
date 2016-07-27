@@ -5,7 +5,7 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import be.nille.jwt.components.claim.JWTClaimStore;
 
 /**
@@ -21,7 +21,7 @@ public class JWTRefresher {
         this.verifier = new JWTVerifier(secret);
     }
 
-    public JWTToken refresh(final JWTToken token) {
+    public JWT refresh(final JWT token) {
         JWTClaimStore claimStore = verifier.verify(token);
         return signer.sign(claimStore);
     }

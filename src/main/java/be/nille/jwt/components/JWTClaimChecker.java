@@ -7,7 +7,7 @@ package be.nille.jwt.components;
 
 import be.nille.jwt.components.claim.JWTClaim;
 import be.nille.jwt.components.claim.JWTClaimStore;
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,7 +23,7 @@ public class JWTClaimChecker {
     }
 
     
-    public boolean tokenContainsClaim(JWTToken token, final JWTClaim claim) {
+    public boolean tokenContainsClaim(JWT token, final JWTClaim claim) {
         JWTClaimStore claimStore = tokenVerifier.verify(token);
         JWTClaim retrievedClaim = claimStore.getClaim(claim.getName());
         return claim.getValue().equals(retrievedClaim.getValue());

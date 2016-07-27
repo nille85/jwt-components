@@ -5,7 +5,7 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import be.nille.jwt.components.claim.JWTClaimStore;
 import com.auth0.jwt.JWTVerifyException;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class JWTVerifier {
         verifier = new com.auth0.jwt.JWTVerifier(secret);
     }
     
-    public JWTClaimStore verify(final JWTToken token){
+    public JWTClaimStore verify(final JWT token){
         try {
             String tokenValue = token.getBase64EncodedValue();
             Map<String, Object> claims = verifier.verify(tokenValue);

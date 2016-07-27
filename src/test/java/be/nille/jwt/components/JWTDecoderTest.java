@@ -8,7 +8,7 @@ package be.nille.jwt.components;
 import be.nille.jwt.components.JWTSigner;
 import be.nille.jwt.components.claim.JWTClaim;
 import be.nille.jwt.components.claim.JWTClaimStore;
-import be.nille.jwt.components.token.JWTToken;
+import be.nille.jwt.components.token.JWT;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -46,7 +46,7 @@ public class JWTDecoderTest {
         JWTClaim claim2 = new JWTClaim("sub", "Token");
         store.addClaim(claim2);
         JWTSigner signer = new JWTSigner("asecret");
-        JWTToken token = signer.sign(store);
+        JWT token = signer.sign(store);
         String tokenToDecode = token.getBase64EncodedValue();
         JWTClaimStore claimStore = decoder.decode(tokenToDecode);
         assertTrue(claimStore.getClaims().size() == 3);
