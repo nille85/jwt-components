@@ -5,8 +5,6 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.claim.JWTClaim;
-import be.nille.jwt.components.claim.JWTClaimStore;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -25,9 +23,9 @@ import com.google.gson.JsonSyntaxException;
 @Slf4j
 public class JWTDecoder {
     
-    public JWTClaimStore decode(final String token){
+    public JWTClaimStore decode(final String jwtAsString){
         JWTClaimStore claimStore = new JWTClaimStore();
-        String payloadString = getPayloadString(token);
+        String payloadString = getPayloadAsString(jwtAsString);
         JsonObject jsonObject = createJsonObject(payloadString);
         for(Map.Entry<String,JsonElement> entry : jsonObject.entrySet()){
             String claimName = entry.getKey();
@@ -39,7 +37,7 @@ public class JWTDecoder {
         return claimStore;
     }
     
-    private String getPayloadString(final String token){
+    private String getPayloadAsString(final String token){
         String[] parts = token.split("\\.");
         if(parts.length!=3){
             throw new InvalidJWTException("The provided token is not a valid token");

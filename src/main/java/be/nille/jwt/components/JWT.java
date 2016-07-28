@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components.token;
+package be.nille.jwt.components;
 
 
 import lombok.AccessLevel;
@@ -18,9 +18,16 @@ import lombok.Setter;
 public class JWT {
     
     private String base64EncodedValue;
+    private JWTClaimStore claimStore;
     
     public JWT(final String base64EncodedValue){
         this.base64EncodedValue = base64EncodedValue;
+        this.claimStore = new JWTClaimStore();
+    }
+    
+    public boolean hasClaim(final JWTClaim claim){
+        JWTClaim retrievedClaim = claimStore.getClaim(claim.getName());
+        return claim.getValue().equals(retrievedClaim.getValue());
     }
     
     

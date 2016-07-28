@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components.claim;
+package be.nille.jwt.components;
 
-import be.nille.jwt.components.claim.JWTClaimStore;
-import be.nille.jwt.components.claim.JWTClaim;
-import be.nille.jwt.components.claim.UnexistingJWTClaimException;
+import be.nille.jwt.components.JWTClaimStore;
+import be.nille.jwt.components.JWTClaim;
+import be.nille.jwt.components.UnexistingJWTClaimException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

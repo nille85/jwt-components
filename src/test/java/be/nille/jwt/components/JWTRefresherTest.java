@@ -5,9 +5,6 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.claim.JWTClaim;
-import be.nille.jwt.components.claim.JWTClaimStore;
-import be.nille.jwt.components.token.JWT;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;

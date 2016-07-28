@@ -5,9 +5,6 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.token.JWT;
-import be.nille.jwt.components.claim.JWTClaimStore;
-
 /**
  * @author nholvoet
  */

@@ -6,9 +6,6 @@
 package be.nille.jwt.components;
 
 import be.nille.jwt.components.JWTSigner;
-import be.nille.jwt.components.claim.JWTClaim;
-import be.nille.jwt.components.claim.JWTClaimStore;
-import be.nille.jwt.components.token.JWT;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

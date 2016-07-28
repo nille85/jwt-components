@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components.token;
+package be.nille.jwt.components;
 
+import be.nille.jwt.components.JWTClaim;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
  * @author nholvoet
  */
-public class JWTTest {
+public class JWTClaimTest {
     
     @Test
     public void create(){
-        JWT jwt = new JWT("tokenvalue");
-        assertEquals("tokenvalue",jwt.getBase64EncodedValue());
+        JWTClaim claim = new JWTClaim("iss", "Nille");
+        assertEquals("iss",claim.getName());
+        assertEquals("Nille", claim.getValue());
     }
 
 }

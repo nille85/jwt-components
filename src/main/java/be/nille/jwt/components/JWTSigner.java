@@ -5,9 +5,6 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.token.JWT;
-import be.nille.jwt.components.claim.JWTClaim;
-import be.nille.jwt.components.claim.JWTClaimStore;
 import java.util.Map;
 import lombok.Setter;
 
@@ -33,8 +30,9 @@ public class JWTSigner {
         ClaimConverter converter = new ClaimConverter();
         Map<String,Object> claimMap = converter.toClaimMap(claimStore);
         String base64EncodedValue = signer.sign(claimMap);
-        JWT token = new JWT(base64EncodedValue);
-        return token;
+        JWT jwt = new JWT(base64EncodedValue);
+        jwt.setClaimStore(claimStore);
+        return jwt;
     }
     
     private JWTClaim createExpirationClaim(){
