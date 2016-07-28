@@ -22,6 +22,10 @@ public class Payload {
         claims = new ArrayList<>();
     }
     
+    public static PayloadBuilder builder(){
+        return new PayloadBuilder();
+    }
+    
     public void addClaim(Claim claim){
         claims.add(claim);
     }
@@ -50,5 +54,26 @@ public class Payload {
         }
         
     }
+    
+    public static class PayloadBuilder{
+        
+        private final Payload payload;
+        
+        public PayloadBuilder(){
+            payload = new Payload();
+        }
+        
+        public PayloadBuilder withClaim(final String name, final Object value){
+            Claim claim = new Claim(name, value);
+            payload.addClaim(claim);
+            return this;
+        }
+            
+        public Payload build(){
+            return payload;
+        }
+    }
+
+    
 
 }

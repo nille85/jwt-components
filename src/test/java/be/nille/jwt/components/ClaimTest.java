@@ -5,18 +5,17 @@
  */
 package be.nille.jwt.components;
 
-import be.nille.jwt.components.JWTClaim;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
  * @author nholvoet
  */
-public class JWTClaimTest {
+public class ClaimTest {
     
     @Test
     public void create(){
-        JWTClaim claim = new JWTClaim("iss", "Nille");
+        Claim claim = new Claim("iss", "Nille");
         assertEquals("iss",claim.getName());
         assertEquals("Nille", claim.getValue());
     }

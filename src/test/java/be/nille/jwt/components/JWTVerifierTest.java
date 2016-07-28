@@ -23,33 +23,31 @@ public class JWTVerifierTest {
     
     @Test
     public void verify(){
-        JWTClaimStore store = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
-        store.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Token");
-        store.addClaim(claim2);
+        Payload payload = Payload.builder()
+                .withClaim("iss", "Nille")
+                .withClaim("sub", "Token")
+                .build();
         JWTSigner signer = new JWTSigner("asecret");
-        JWT token = signer.sign(store);
-        JWTClaimStore verifiedStore = verifier.verify(token);
-        assertTrue(verifiedStore.getClaims().size() == 3);
+        JWT jwt = signer.sign(payload);
+        Payload verifiedPayload = verifier.verify(jwt);
+        assertTrue(verifiedPayload.getClaims().size() == 3);
        
     }
     
     @Test(expected = InvalidJWTException.class )
     public void testVerifyTokensThrowsInvalidTokenException(){
-        JWT token = new JWT("klmsdlmdfs.lmdkfd.klmsdflm");
-        verifier.verify(token);
+        JWT jwt = new JWT("klmsdlmdfs.lmdkfd.klmsdflm");
+        verifier.verify(jwt);
     }
     
     @Test(expected = InvalidJWTException.class )
     public void verifyWhenSignedWithOtherSecret(){
-        JWTClaimStore store = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
-        store.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Token");
-        store.addClaim(claim2);
+        Payload payload = Payload.builder()
+                .withClaim("iss", "Nille")
+                .withClaim("sub", "Token")
+                .build();
         JWTSigner signer = new JWTSigner("password");
-        JWT token = signer.sign(store);
+        JWT token = signer.sign(payload);
         verifier.verify(token);
     }
 }

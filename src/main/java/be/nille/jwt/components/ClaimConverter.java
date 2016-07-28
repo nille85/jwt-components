@@ -14,17 +14,17 @@ import java.util.Map;
 public class ClaimConverter {
     
     public Payload toJWTClaimStore(final Map<String,Object> claimMap){
-        Payload store = new Payload();
+        Payload payload = new Payload();
         for(Map.Entry<String,Object> claim : claimMap.entrySet()){
             Claim jwtClaim = new Claim(claim.getKey(), claim.getValue());
-            store.addClaim(jwtClaim);
+            payload.addClaim(jwtClaim);
         }
-        return store;
+        return payload;
     }
     
-    public Map<String,Object> toClaimMap(final Payload claimStore){
+    public Map<String,Object> toClaimMap(final Payload payload){
         Map<String,Object> claimMap = new HashMap<>();
-        for(Claim claim : claimStore.getClaims()){
+        for(Claim claim : payload.getClaims()){
             claimMap.put(claim.getName(), claim.getValue());
         }
         return claimMap;

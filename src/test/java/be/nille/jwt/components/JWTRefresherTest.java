@@ -25,10 +25,10 @@ public class JWTRefresherTest {
     @Test
     public void refresh() throws InterruptedException{
         JWTSigner signer = new JWTSigner("asecret");
-        JWTClaimStore claimStore = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
+        Payload claimStore = new Payload();
+        Claim claim1 = new Claim("iss", "Nille");
         claimStore.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Token");
+        Claim claim2 = new Claim("sub", "Token");
         claimStore.addClaim(claim2);
         JWT token = signer.sign(claimStore);
         Thread.sleep(10);

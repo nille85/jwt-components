@@ -20,46 +20,46 @@ public class JWTTest {
     public void create(){
         JWT jwt = new JWT("tokenvalue");
         assertEquals("tokenvalue",jwt.getBase64EncodedValue());
-        assertNotNull(jwt.getClaimStore());
+        assertNotNull(jwt.getPayload());
     }
     
     @Test
     public void hasClaim(){
-        JWTClaimStore store = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
-        store.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Token");
-        store.addClaim(claim2);
-        JWTClaim claimToRetrieve = new JWTClaim("sub", "Token");
+        Payload payload = new Payload();
+        Claim claim1 = new Claim("iss", "Nille");
+        payload.addClaim(claim1);
+        Claim claim2 = new Claim("sub", "Token");
+        payload.addClaim(claim2);
+        Claim claimToRetrieve = new Claim("sub", "Token");
         JWTSigner signer = new JWTSigner("asecret");
-        JWT token = signer.sign(store);
+        JWT token = signer.sign(payload);
         assertTrue(token.hasClaim(claimToRetrieve));
     }
     
     @Test
     public void doesNotHaveClaim(){
-        JWTClaimStore store = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
-        store.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Toke");
-        store.addClaim(claim2);
-        JWTClaim claimToRetrieve = new JWTClaim("sub", "Token");
+        Payload payload = new Payload();
+        Claim claim1 = new Claim("iss", "Nille");
+        payload.addClaim(claim1);
+        Claim claim2 = new Claim("sub", "Toke");
+        payload.addClaim(claim2);
+        Claim claimToRetrieve = new Claim("sub", "Token");
         JWTSigner signer = new JWTSigner("asecret");
-        JWT token = signer.sign(store);
-        assertFalse(token.hasClaim(claimToRetrieve));
+        JWT jwt = signer.sign(payload);
+        assertFalse(jwt.hasClaim(claimToRetrieve));
     }
     
     @Test(expected=UnexistingJWTClaimException.class)
     public void hasClaimWhenClaimNameNotFound(){
-        JWTClaimStore store = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
+        Payload store = new Payload();
+        Claim claim1 = new Claim("iss", "Nille");
         store.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Toke");
+        Claim claim2 = new Claim("sub", "Toke");
         store.addClaim(claim2);
-        JWTClaim claimToRetrieve = new JWTClaim("other", "Token");
+        Claim claimToRetrieve = new Claim("other", "Token");
         JWTSigner signer = new JWTSigner("asecret");
-        JWT token = signer.sign(store);
-        token.hasClaim(claimToRetrieve);
+        JWT jwt = signer.sign(store);
+        jwt.hasClaim(claimToRetrieve);
     }
 
 }

@@ -26,27 +26,37 @@ public class JWTSignerTest {
 
     @Test
     public void testSign() {
-        JWTClaimStore claimStore = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
-        claimStore.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Token");
-        claimStore.addClaim(claim2);
-        JWT token = signer.sign(claimStore);
-        assertNotNull(token);
-        log.debug(token.getBase64EncodedValue());
+        Payload payload = Payload.builder()
+                .withClaim("iss", "Nille")
+                .withClaim("sub", "Token")
+                .build();
+        JWT jwt = signer.sign(payload);
+        assertNotNull(jwt);
+        log.debug(jwt.getBase64EncodedValue());
+    }
+    
+    @Test
+    public void testSignWithExpiration() {
+        Payload payload = Payload.builder()
+                .withClaim("iss", "Nille")
+                .withClaim("sub", "Token")
+                .build();
+        signer.setMinutesValid(60);
+        JWT jwt = signer.sign(payload);
+        assertNotNull(jwt);
+        log.debug(jwt.getBase64EncodedValue());
     }
 
     @Test
     public void testSignMultipleTimes() throws InterruptedException {
-        JWTClaimStore claimStore = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
-        claimStore.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Token");
-        claimStore.addClaim(claim2);
-        JWT token1 = signer.sign(claimStore);
+        Payload payload = Payload.builder()
+                .withClaim("iss", "Nille")
+                .withClaim("sub", "Token")
+                .build();
+        JWT jwt1 = signer.sign(payload);
         Thread.sleep(10);
-        JWT token2 = signer.sign(claimStore);
-        assertNotEquals(token1.getBase64EncodedValue(), token2.getBase64EncodedValue());
+        JWT jwt2 = signer.sign(payload);
+        assertNotEquals(jwt1.getBase64EncodedValue(), jwt2.getBase64EncodedValue());
     }
 
 }

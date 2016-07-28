@@ -24,17 +24,17 @@ import com.google.gson.JsonSyntaxException;
 public class JWTDecoder {
     
     public Payload decode(final String jwtAsString){
-        Payload claimStore = new Payload();
+        Payload payload = new Payload();
         String payloadString = getPayloadAsString(jwtAsString);
         JsonObject jsonObject = createJsonObject(payloadString);
         for(Map.Entry<String,JsonElement> entry : jsonObject.entrySet()){
             String claimName = entry.getKey();
             JsonElement claimValue = entry.getValue();
-            Claim jwtClaim = new Claim(claimName, claimValue);
-            claimStore.addClaim(jwtClaim);
+            Claim claim = new Claim(claimName, claimValue);
+            payload.addClaim(claim);
             log.debug(entry.getKey() + ":" + entry.getValue());
         }
-        return claimStore;
+        return payload;
     }
     
     private String getPayloadAsString(final String token){

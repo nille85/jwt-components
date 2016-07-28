@@ -37,15 +37,15 @@ public class JWTDecoderTest {
     
     @Test
     public void decode(){
-        JWTClaimStore store = new JWTClaimStore();
-        JWTClaim claim1 = new JWTClaim("iss", "Nille");
+        Payload store = new Payload();
+        Claim claim1 = new Claim("iss", "Nille");
         store.addClaim(claim1);
-        JWTClaim claim2 = new JWTClaim("sub", "Token");
+        Claim claim2 = new Claim("sub", "Token");
         store.addClaim(claim2);
         JWTSigner signer = new JWTSigner("asecret");
         JWT token = signer.sign(store);
         String tokenToDecode = token.getBase64EncodedValue();
-        JWTClaimStore claimStore = decoder.decode(tokenToDecode);
+        Payload claimStore = decoder.decode(tokenToDecode);
         assertTrue(claimStore.getClaims().size() == 3);
     }
     
