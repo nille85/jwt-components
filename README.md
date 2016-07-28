@@ -10,7 +10,7 @@ This little library contains several components that will enable you to work wit
 
 ### JWTSigner
 The JWTSigner contains a method that enables you to sign a payload. The sign method requires a Payload as input. It returns a JWT that contains a Base64 encoded String representation of the JWT.
-When the JWT is signed a Claim containing the expiry date is automatically added. The expiration time of a JWT can be configured by setting the minutesValid method.
+When the JWT is signed a Claim containing the expiry date is automatically added. The expiration time of a JWT can also be configured when creating the JWTSigner
 In order to create a JWTSigner, you have to provide it with a secret. The secret should be the same secret that you in order to verify the token. 
 
 You can use it in the following way:
