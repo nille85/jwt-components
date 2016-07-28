@@ -31,7 +31,7 @@ You can use it in the following way:
 ```java
 JWTVerifier verifier = new JWTVerifier("myveryverysecret");
 Payload verifiedPayload = verifier.verify(jwt);
-List<Claim> claims = verifiedPayload.getClaims();
+Set<Claim> claims = verifiedPayload.getClaims();
 ```
 
 ### JWTRefresher
