@@ -39,7 +39,9 @@ List<Claim> claims = verifiedPayload.getClaims();
 The JWTRefresher simply takes a JWT as input, verifies it and resigns it. When a JWT gets refreshed, the expiration time of the JWT will be extended. 
 
 ```java
+JWTSigner signer = JWTSigner("myveryverysecret");
 JWT jwt = signer.sign(payload);
+JWTRefresher refresher = new JWTRefresher("myveryverysecret);
 JWT refreshedJWT = refresher.refresh(jwt);
 ```
 
