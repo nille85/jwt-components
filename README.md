@@ -34,4 +34,20 @@ Payload verifiedPayload = verifier.verify(jwt);
 List<Claim> claims = verifiedPayload.getClaims();
 ```
 
+### JWTRefresher
+
+The JWTRefresher simply takes a JWT as input, verifies it and resigns it. When a JWT gets refreshed, the expiration time of the JWT will be extended. 
+
+```java
+JWT jwt = signer.sign(payload);
+JWT refreshedJWT = refresher.refresh(jwt);
+```
+
 ### JWTDecoder
+
+The JWTDecoders decode method requires a base64 encoded String value as input. It decoded it and returns a JWT Object.
+
+```java
+JWTDecoder decoder = new JWTDecoder();
+Payload payload = decoder.decode(base64EncodedStringValue);
+```
