@@ -22,7 +22,7 @@ public class JWTVerifier {
         verifier = new com.auth0.jwt.JWTVerifier(secret);
     }
     
-    public JWTClaimStore verify(final JWT token){
+    public Payload verify(final JWT token){
         try {
             String tokenValue = token.getBase64EncodedValue();
             Map<String, Object> claims = verifier.verify(tokenValue);

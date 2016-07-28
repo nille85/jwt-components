@@ -14,20 +14,20 @@ import lombok.Getter;
  * @author nholvoet
  */
 @Getter
-public class JWTClaimStore {
+public class Payload {
     
-    private final List<JWTClaim> claims;
+    private final List<Claim> claims;
     
-    public JWTClaimStore(){
+    public Payload(){
         claims = new ArrayList<>();
     }
     
-    public void addClaim(JWTClaim claim){
+    public void addClaim(Claim claim){
         claims.add(claim);
     }
     
-    public JWTClaim getClaim(final String name){
-        for(JWTClaim claim : claims){
+    public Claim getClaim(final String name){
+        for(Claim claim : claims){
             if(name.equals(claim.getName())){
                 return claim;
             }
@@ -37,8 +37,8 @@ public class JWTClaimStore {
     
     public void removeClaim(final String name){
         boolean removed = false;
-        for (Iterator<JWTClaim> iter = claims.listIterator(); iter.hasNext();) {
-            JWTClaim claim =  iter.next();
+        for (Iterator<Claim> iter = claims.listIterator(); iter.hasNext();) {
+            Claim claim =  iter.next();
             if (name.equals(claim.getName()))  {
                 iter.remove(); 
                 removed = true;

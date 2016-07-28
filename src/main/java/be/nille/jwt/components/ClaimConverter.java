@@ -13,18 +13,18 @@ import java.util.Map;
  */
 public class ClaimConverter {
     
-    public JWTClaimStore toJWTClaimStore(final Map<String,Object> claimMap){
-        JWTClaimStore store = new JWTClaimStore();
+    public Payload toJWTClaimStore(final Map<String,Object> claimMap){
+        Payload store = new Payload();
         for(Map.Entry<String,Object> claim : claimMap.entrySet()){
-            JWTClaim jwtClaim = new JWTClaim(claim.getKey(), claim.getValue());
+            Claim jwtClaim = new Claim(claim.getKey(), claim.getValue());
             store.addClaim(jwtClaim);
         }
         return store;
     }
     
-    public Map<String,Object> toClaimMap(final JWTClaimStore claimStore){
+    public Map<String,Object> toClaimMap(final Payload claimStore){
         Map<String,Object> claimMap = new HashMap<>();
-        for(JWTClaim claim : claimStore.getClaims()){
+        for(Claim claim : claimStore.getClaims()){
             claimMap.put(claim.getName(), claim.getValue());
         }
         return claimMap;

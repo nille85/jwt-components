@@ -23,14 +23,14 @@ import com.google.gson.JsonSyntaxException;
 @Slf4j
 public class JWTDecoder {
     
-    public JWTClaimStore decode(final String jwtAsString){
-        JWTClaimStore claimStore = new JWTClaimStore();
+    public Payload decode(final String jwtAsString){
+        Payload claimStore = new Payload();
         String payloadString = getPayloadAsString(jwtAsString);
         JsonObject jsonObject = createJsonObject(payloadString);
         for(Map.Entry<String,JsonElement> entry : jsonObject.entrySet()){
             String claimName = entry.getKey();
             JsonElement claimValue = entry.getValue();
-            JWTClaim jwtClaim = new JWTClaim(claimName, claimValue);
+            Claim jwtClaim = new Claim(claimName, claimValue);
             claimStore.addClaim(jwtClaim);
             log.debug(entry.getKey() + ":" + entry.getValue());
         }

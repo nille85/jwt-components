@@ -24,20 +24,20 @@ public class JWTSigner {
         minutesValid = DEFAULT_MINUTES_VALID;
     }
     
-    public JWT sign(final JWTClaimStore claimStore) {
-        JWTClaim expirationClaim = createExpirationClaim();
-        claimStore.addClaim(expirationClaim);
+    public JWT sign(final Payload payload) {
+        Claim expirationClaim = createExpirationClaim();
+        payload.addClaim(expirationClaim);
         ClaimConverter converter = new ClaimConverter();
-        Map<String,Object> claimMap = converter.toClaimMap(claimStore);
+        Map<String,Object> claimMap = converter.toClaimMap(payload);
         String base64EncodedValue = signer.sign(claimMap);
         JWT jwt = new JWT(base64EncodedValue);
-        jwt.setClaimStore(claimStore);
+        jwt.setPayload(payload);
         return jwt;
     }
     
-    private JWTClaim createExpirationClaim(){
+    private Claim createExpirationClaim(){
         Expiration expiration = new Expiration(Expiration.minutes(minutesValid));
-        JWTClaim expirationClaim = new JWTClaim("exp",expiration.getTimeInMillis());
+        Claim expirationClaim = new Claim("exp",expiration.getTimeInMillis());
         return expirationClaim;
     }
     

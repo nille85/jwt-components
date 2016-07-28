@@ -19,7 +19,7 @@ public class JWTRefresher {
     }
 
     public JWT refresh(final JWT token) {
-        JWTClaimStore claimStore = verifier.verify(token);
+        Payload claimStore = verifier.verify(token);
         return signer.sign(claimStore);
     }
 

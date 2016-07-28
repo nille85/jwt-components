@@ -13,12 +13,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Getter
-public class JWTClaim {
+public class Claim {
 
     private final String name;
     private final Object value;
 
-    public JWTClaim(final String name, final Object value) {
+    public Claim(final String name, final Object value) {
         this.name = name;
         this.value = value;
         log.debug("Create JWT claim with name " + name + " and value " + this.value);

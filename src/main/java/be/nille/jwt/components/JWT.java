@@ -18,15 +18,15 @@ import lombok.Setter;
 public class JWT {
     
     private String base64EncodedValue;
-    private JWTClaimStore claimStore;
+    private Payload payload;
     
     public JWT(final String base64EncodedValue){
         this.base64EncodedValue = base64EncodedValue;
-        this.claimStore = new JWTClaimStore();
+        this.payload = new Payload();
     }
     
-    public boolean hasClaim(final JWTClaim claim){
-        JWTClaim retrievedClaim = claimStore.getClaim(claim.getName());
+    public boolean hasClaim(final Claim claim){
+        Claim retrievedClaim = payload.getClaim(claim.getName());
         return claim.getValue().equals(retrievedClaim.getValue());
     }
     
