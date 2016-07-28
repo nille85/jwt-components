@@ -13,33 +13,28 @@ import lombok.Setter;
  */
 public class JWTSigner {
 
-    private static final int DEFAULT_MINUTES_VALID = 1440;
-    
     private final com.auth0.jwt.JWTSigner signer;
-    @Setter
-    private int minutesValid;
-    
-    public JWTSigner(final String secret){
+
+    private final Expiration expiration;
+
+    public JWTSigner(final String secret) {
         signer = new com.auth0.jwt.JWTSigner(secret);
-        minutesValid = DEFAULT_MINUTES_VALID;
+        expiration = new Expiration();
     }
-    
+
+    public JWTSigner(final String secret, final int minutesValid) {
+        signer = new com.auth0.jwt.JWTSigner(secret);
+        expiration = new Expiration(minutesValid);
+    }
+
     public JWT sign(final Payload payload) {
-        Claim expirationClaim = createExpirationClaim();
-        payload.addClaim(expirationClaim);
+        payload.addClaim(expiration.createClaim());
         ClaimConverter converter = new ClaimConverter();
-        Map<String,Object> claimMap = converter.toClaimMap(payload);
+        Map<String, Object> claimMap = converter.toClaimMap(payload);
         String base64EncodedValue = signer.sign(claimMap);
         JWT jwt = new JWT(base64EncodedValue);
         jwt.setPayload(payload);
         return jwt;
     }
-    
-    private Claim createExpirationClaim(){
-        Expiration expiration = new Expiration(Expiration.minutes(minutesValid));
-        Claim expirationClaim = new Claim("exp",expiration.getTimeInMillis());
-        return expirationClaim;
-    }
-    
-    
+
 }

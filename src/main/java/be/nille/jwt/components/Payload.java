@@ -5,9 +5,9 @@
  */
 package be.nille.jwt.components;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 
 /**
@@ -16,10 +16,10 @@ import lombok.Getter;
 @Getter
 public class Payload {
     
-    private final List<Claim> claims;
+    private final Set<Claim> claims;
     
     public Payload(){
-        claims = new ArrayList<>();
+        claims = new HashSet<>();
     }
     
     public static PayloadBuilder builder(){
@@ -41,7 +41,7 @@ public class Payload {
     
     public void removeClaim(final String name){
         boolean removed = false;
-        for (Iterator<Claim> iter = claims.listIterator(); iter.hasNext();) {
+        for (Iterator<Claim> iter = claims.iterator(); iter.hasNext();) {
             Claim claim =  iter.next();
             if (name.equals(claim.getName()))  {
                 iter.remove(); 

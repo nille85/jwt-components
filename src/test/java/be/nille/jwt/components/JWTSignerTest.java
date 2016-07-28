@@ -41,8 +41,8 @@ public class JWTSignerTest {
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
                 .build();
-        signer.setMinutesValid(60);
-        JWT jwt = signer.sign(payload);
+        JWTSigner signerWithCustomExpiration = new JWTSigner("asecret", 60);
+        JWT jwt = signerWithCustomExpiration.sign(payload);
         assertNotNull(jwt);
         log.debug(jwt.getBase64EncodedValue());
     }

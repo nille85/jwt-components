@@ -25,14 +25,14 @@ public class JWTRefresherTest {
     @Test
     public void refresh() throws InterruptedException{
         JWTSigner signer = new JWTSigner("asecret");
-        Payload claimStore = new Payload();
+        Payload payload = new Payload();
         Claim claim1 = new Claim("iss", "Nille");
-        claimStore.addClaim(claim1);
+        payload.addClaim(claim1);
         Claim claim2 = new Claim("sub", "Token");
-        claimStore.addClaim(claim2);
-        JWT token = signer.sign(claimStore);
+        payload.addClaim(claim2);
+        JWT jwt = signer.sign(payload);
         Thread.sleep(10);
-        JWT refreshedToken = refresher.refresh(token);
-        assertNotEquals(token.getBase64EncodedValue(), refreshedToken.getBase64EncodedValue());
+        JWT refreshedJwt = refresher.refresh(jwt);
+        assertNotEquals(jwt.getBase64EncodedValue(), refreshedJwt.getBase64EncodedValue());
     }
 }

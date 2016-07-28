@@ -13,23 +13,32 @@ import lombok.Getter;
  */
 @Getter
 public class Expiration {
+    
+    private static final int DEFAULT_MINUTES_VALID = 1440;
 
     public static int minutes(int minutes) {
         return minutes;
     }
-
-    private final Long timeInMillis;
+    
     private final int expirationLength;
 
+    public Expiration(){
+        this.expirationLength = DEFAULT_MINUTES_VALID;    
+    }
+    
     public Expiration(final int expirationLength) {
         this.expirationLength = expirationLength;
-        this.timeInMillis = getExpiryDate();
     }
 
     private Long getExpiryDate() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MINUTE, expirationLength);
         return cal.getTimeInMillis();
+    }
+    
+    public Claim createClaim(){
+        Claim expirationClaim = new Claim("exp",getExpiryDate());
+        return expirationClaim;
     }
 
 }
