@@ -8,13 +8,7 @@ This little library contains several components that will enable you to work wit
 ### JWTSigner
 
 ```java
-JWTClaimStore claimStore = new JWTClaimStore();
-JWTClaim claim = new JWTClaim("iss", "NILLE");
-claimStore.addClaim(claim);
-claim = new JWTClaim("sub", "JWT");
-claimStore.addClaim(claim2);
-JWT jwt = signer.sign(claimStore);
-String jwtAsString = jwt.getBase64EncodedValue();
+
 ```
 
 ### JWTVerifier
