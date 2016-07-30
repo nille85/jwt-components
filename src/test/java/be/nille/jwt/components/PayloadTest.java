@@ -6,6 +6,7 @@
 package be.nille.jwt.components;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -47,6 +48,20 @@ public class PayloadTest {
         Claim claim = new Claim("iss","Nille");
         payload.addClaim(claim);
         payload.getClaim("sub");
+    }
+    
+    @Test
+    public void hasClaim(){
+        Claim claim = new Claim("iss","Nille");
+        payload.addClaim(claim);
+        assertTrue(payload.hasClaim("iss"));
+    }
+    
+    @Test
+    public void doesntHaveClaim(){
+        Claim claim = new Claim("iss","Nille");
+        payload.addClaim(claim);
+        assertFalse(payload.hasClaim("dsdd"));
     }
     
     @Test

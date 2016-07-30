@@ -30,6 +30,15 @@ public class Payload {
         claims.add(claim);
     }
     
+    public boolean hasClaim(final String name){
+        try{
+            getClaim(name);
+            return true;
+        }catch(UnexistingJWTClaimException ex){
+            return false;
+        }
+    }
+    
     public Claim getClaim(final String name){
         for(Claim claim : claims){
             if(name.equals(claim.getName())){
