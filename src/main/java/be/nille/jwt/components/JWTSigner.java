@@ -6,7 +6,6 @@
 package be.nille.jwt.components;
 
 import java.util.Map;
-import lombok.Setter;
 
 /**
  * @author nholvoet
@@ -33,7 +32,6 @@ public class JWTSigner {
         Map<String, Object> claimMap = converter.toClaimMap(payload);
         String base64EncodedValue = signer.sign(claimMap);
         JWT jwt = new JWT(base64EncodedValue);
-        jwt.setPayload(payload);
         return jwt;
     }
 
