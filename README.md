@@ -15,7 +15,7 @@ In order to create a JWTSigner, you have to provide it with a secret. The secret
 
 You can use it in the following way:
 ```java
-JWTSigner signer = JWTSigner("myveryverysecret");
+JWTSigner signer = JWTStringSigner("myveryverysecret");
 Payload payload = Payload.builder()
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
@@ -29,21 +29,11 @@ The JWTVerifier contains the method verify. It takes a Signed JWT as input and t
 
 You can use it in the following way:
 ```java
-JWTVerifier verifier = new JWTVerifier("myveryverysecret");
+JWTVerifier verifier = new JWTStringVerifier("myveryverysecret");
 Payload verifiedPayload = verifier.verify(jwt);
 Set<Claim> claims = verifiedPayload.getClaims();
 ```
 
-### JWTRefresher
-
-The JWTRefresher simply takes a JWT as input, verifies it and resigns it. When a JWT gets refreshed, the expiration time of the JWT will be extended. 
-
-```java
-JWTSigner signer = JWTSigner("myveryverysecret");
-JWT jwt = signer.sign(payload);
-JWTRefresher refresher = new JWTRefresher("myveryverysecret);
-JWT refreshedJWT = refresher.refresh(jwt);
-```
 
 ### JWTDecoder
 
