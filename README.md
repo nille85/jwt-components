@@ -46,6 +46,7 @@ Payload payload = decoder.decode(base64EncodedStringValue);
 
 ## Support for assymetric keys using RSA
 
+It is also possible to sign the JWT with a private key. The public key can then be passed on to the receiver of the JWT. Subsequently, the receiver can verify the contents of the JWT with the public key. In this way, there is no need to share a common secret.
 ```java
 KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
 kpg.initialize(1024);
