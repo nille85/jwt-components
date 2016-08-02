@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.verifier;
 
+import be.nille.jwt.components.converter.ClaimConverter;
+import be.nille.jwt.components.exception.ExpiredJWTException;
+import be.nille.jwt.components.exception.InvalidJWTException;
+import be.nille.jwt.components.model.JWT;
+import be.nille.jwt.components.model.Payload;
 import com.auth0.jwt.JWTVerifyException;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -14,26 +19,23 @@ import java.util.Map;
 /**
  * @author nholvoet
  */
-public class JWTVerifier {
+public abstract class JWTVerifier {
     
-    private final com.auth0.jwt.JWTVerifier verifier;
-    
-    public JWTVerifier(final String secret){
-        verifier = new com.auth0.jwt.JWTVerifier(secret);
-    }
     
     public Payload verify(final JWT token){
         try {
             String tokenValue = token.getBase64EncodedValue();
-            Map<String, Object> claims = verifier.verify(tokenValue);
+            Map<String, Object> claims = internalVerify(tokenValue);
             checkExpiryDate(claims);
             ClaimConverter converter = new ClaimConverter();
-            return converter.toJWTClaimStore(claims);
-        } catch (IOException | GeneralSecurityException | JWTVerifyException | RuntimeException ex) {
+            return converter.toPayload(claims);
+        } catch (IOException | GeneralSecurityException | JWTVerifyException ex) {
             throw new InvalidJWTException("Token could not be verified:" + ex.getMessage());
         }
         
     }
+    
+    protected abstract Map<String,Object> internalVerify(final String tokenValue) throws IOException, GeneralSecurityException, JWTVerifyException;
     
     private void checkExpiryDate(Map<String, Object> claims){
         Long expiryDate = (Long) claims.get("exp");

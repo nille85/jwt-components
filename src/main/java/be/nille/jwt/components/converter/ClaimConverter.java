@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.converter;
 
+import be.nille.jwt.components.model.Payload;
+import be.nille.jwt.components.model.Claim;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +15,7 @@ import java.util.Map;
  */
 public class ClaimConverter {
     
-    public Payload toJWTClaimStore(final Map<String,Object> claimMap){
+    public Payload toPayload(final Map<String,Object> claimMap){
         Payload payload = new Payload();
         for(Map.Entry<String,Object> claim : claimMap.entrySet()){
             Claim jwtClaim = new Claim(claim.getKey(), claim.getValue());

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.signer;
 
+import be.nille.jwt.components.model.Claim;
 import java.util.Calendar;
 import lombok.Getter;
 

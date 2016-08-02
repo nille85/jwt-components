@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.signer;
 
+import be.nille.jwt.components.model.JWT;
+import be.nille.jwt.components.model.Payload;
+import be.nille.jwt.components.signer.Expiration;
+import be.nille.jwt.components.signer.JWTStringSigner;
 import lombok.extern.slf4j.Slf4j;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,13 +19,14 @@ import org.junit.Test;
  * @author nholvoet
  */
 @Slf4j
-public class JWTSignerTest {
+public class JWTStringSignerTest {
 
-    private JWTSigner signer;
+    private JWTStringSigner signer;
 
     @Before
     public void setup() {
-        signer = new JWTSigner("asecret");
+        
+        signer = new JWTStringSigner("asecret");
     }
 
     @Test
@@ -41,7 +46,8 @@ public class JWTSignerTest {
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
                 .build();
-        JWTSigner signerWithCustomExpiration = new JWTSigner("asecret", 60);
+        JWTSigner signerWithCustomExpiration = new JWTStringSigner("asecret");
+        signerWithCustomExpiration.setExpiration(new Expiration(60));
         JWT jwt = signerWithCustomExpiration.sign(payload);
         assertNotNull(jwt);
         log.debug(jwt.getBase64EncodedValue());

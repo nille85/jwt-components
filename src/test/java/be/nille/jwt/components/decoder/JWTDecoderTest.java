@@ -3,21 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.decoder;
 
-import be.nille.jwt.components.JWTSigner;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import be.nille.jwt.components.decoder.JWTDecoder;
+import be.nille.jwt.components.exception.InvalidJWTException;
+import be.nille.jwt.components.model.Payload;
+import be.nille.jwt.components.model.JWT;
+import be.nille.jwt.components.model.Claim;
+import be.nille.jwt.components.signer.JWTSigner;
+import be.nille.jwt.components.signer.JWTStringSigner;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.binary.Base64;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +37,7 @@ public class JWTDecoderTest {
         store.addClaim(claim1);
         Claim claim2 = new Claim("sub", "Token");
         store.addClaim(claim2);
-        JWTSigner signer = new JWTSigner("asecret");
+        JWTSigner signer = new JWTStringSigner("asecret");
         JWT token = signer.sign(store);
         String tokenToDecode = token.getBase64EncodedValue();
         Payload claimStore = decoder.decode(tokenToDecode);

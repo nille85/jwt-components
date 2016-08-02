@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.exception;
 
 /**
  * @author nholvoet
  */
-public class InvalidAPIUsageException extends RuntimeException {
+public class ExpiredJWTException extends RuntimeException {
 
-    public InvalidAPIUsageException(final String message, final Throwable throwable) {
-        super(message, throwable);
+    public ExpiredJWTException(final String message) {
+        super(message);
     }
 
 }

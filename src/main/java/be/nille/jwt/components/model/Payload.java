@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.model;
 
+import be.nille.jwt.components.exception.UnexistingJWTClaimException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -27,6 +28,10 @@ public class Payload {
     }
     
     public void addClaim(Claim claim){
+        if(hasClaim(claim.getName())){
+           Claim retrievedClaim = getClaim(claim.getName());
+           claims.remove(retrievedClaim);
+        }
         claims.add(claim);
     }
     

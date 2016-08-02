@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.model;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

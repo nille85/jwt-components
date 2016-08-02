@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.verifier;
 
+import be.nille.jwt.components.exception.InvalidJWTException;
+import be.nille.jwt.components.model.JWT;
+import be.nille.jwt.components.model.Payload;
+import be.nille.jwt.components.signer.JWTSigner;
+import be.nille.jwt.components.signer.JWTStringSigner;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,13 +17,13 @@ import org.junit.Test;
 /**
  * @author nholvoet
  */
-public class JWTVerifierTest {
+public class JWTStringVerifierTest {
 
     private JWTVerifier verifier;
     
     @Before
     public void setup(){
-        verifier = new JWTVerifier("asecret");
+        verifier = new JWTStringVerifier("asecret");
     }
     
     @Test
@@ -27,7 +32,7 @@ public class JWTVerifierTest {
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
                 .build();
-        JWTSigner signer = new JWTSigner("asecret");
+        JWTSigner signer = new JWTStringSigner("asecret");
         JWT jwt = signer.sign(payload);
         Payload verifiedPayload = verifier.verify(jwt);
         assertTrue(verifiedPayload.getClaims().size() == 3);
@@ -46,7 +51,7 @@ public class JWTVerifierTest {
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
                 .build();
-        JWTSigner signer = new JWTSigner("password");
+        JWTSigner signer = new JWTStringSigner("password");
         JWT token = signer.sign(payload);
         verifier.verify(token);
     }

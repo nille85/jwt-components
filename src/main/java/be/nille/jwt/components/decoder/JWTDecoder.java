@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components;
+package be.nille.jwt.components.decoder;
 
+import be.nille.jwt.components.exception.InvalidJWTException;
+import be.nille.jwt.components.exception.ImplementationException;
+import be.nille.jwt.components.model.Payload;
+import be.nille.jwt.components.model.Claim;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -47,7 +51,7 @@ public class JWTDecoder {
         try{
             return new String(decoder.decode(payload), "UTF-8");
         }catch(UnsupportedEncodingException ex){
-            throw new InvalidAPIUsageException("The provided encoding is not supported", ex);
+            throw new ImplementationException("The provided encoding is not supported", ex);
         }
     }
     
