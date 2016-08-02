@@ -43,3 +43,23 @@ The JWTDecoders decode method requires a base64 encoded String value as input. I
 JWTDecoder decoder = new JWTDecoder();
 Payload payload = decoder.decode(base64EncodedStringValue);
 ```
+
+## Support for assymetric keys using RSA
+
+```java
+KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+kpg.initialize(1024);
+KeyPair kp = kpg.genKeyPair();
+PrivateKey privateKey = kp.getPrivate();
+PublicKey publicKey = kp.getPublic();
+signer = new JWTPrivateKeySigner(privateKey);
+verifier = new JWTPublicKeyVerifier(publicKey);
+
+Payload payload = Payload.builder()
+        .withClaim("iss", "Nille")
+        .withClaim("sub", "Token")
+        .build();
+
+JWT jwt = signer.sign(payload);
+Payload verifiedPayload = verifier.verify(jwt);
+```
