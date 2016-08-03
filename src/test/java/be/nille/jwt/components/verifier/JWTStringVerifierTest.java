@@ -35,7 +35,7 @@ public class JWTStringVerifierTest {
         JWTSigner signer = new JWTStringSigner("asecret");
         JWT jwt = signer.sign(payload);
         Payload verifiedPayload = verifier.verify(jwt);
-        assertTrue(verifiedPayload.getClaims().size() == 3);
+        assertTrue(verifiedPayload.getClaims().size() == 2);
        
     }
     

@@ -41,7 +41,7 @@ public class JWTDecoderTest {
         JWT token = signer.sign(store);
         String tokenToDecode = token.getBase64EncodedValue();
         Payload claimStore = decoder.decode(tokenToDecode);
-        assertTrue(claimStore.getClaims().size() == 3);
+        assertTrue(claimStore.getClaims().size() == 2);
     }
     
     @Test(expected = InvalidJWTException.class)

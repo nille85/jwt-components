@@ -82,6 +82,12 @@ public class Payload {
             payload.addClaim(claim);
             return this;
         }
+        
+        public PayloadBuilder withExpirationInMinutes(final int minutes){
+            Expiration expiration = new Expiration(minutes);
+            payload.addClaim(expiration.createClaim());
+            return this;
+        }
             
         public Payload build(){
             return payload;

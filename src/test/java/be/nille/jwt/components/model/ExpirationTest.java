@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.nille.jwt.components.signer;
+package be.nille.jwt.components.model;
 
-import be.nille.jwt.components.signer.Expiration;
-import java.util.Date;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**

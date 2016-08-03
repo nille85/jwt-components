@@ -6,31 +6,20 @@
 package be.nille.jwt.components.signer;
 
 import be.nille.jwt.components.converter.ClaimConverter;
-import be.nille.jwt.components.converter.ClaimConverter;
-import be.nille.jwt.components.model.JWT;
 import be.nille.jwt.components.model.JWT;
 import be.nille.jwt.components.model.Payload;
-import be.nille.jwt.components.model.Payload;
-import be.nille.jwt.components.signer.Expiration;
 import java.util.Map;
-import lombok.Setter;
 
 /**
  * @author nholvoet
  */
 public abstract class JWTSigner {
  
-    @Setter
-    private Expiration expiration;
-   
-
     public JWTSigner() {
-        expiration = new Expiration();
     }
 
    
     public JWT sign(final Payload payload) {
-        payload.addClaim(expiration.createClaim());
         ClaimConverter converter = new ClaimConverter();
         Map<String, Object> claimMap = converter.toClaimMap(payload);
         String base64EncodedValue = internalSign(claimMap);

@@ -20,9 +20,8 @@ import java.util.Map;
  * @author nholvoet
  */
 public abstract class JWTVerifier {
-    
-    
-    public Payload verify(final JWT token){
+
+    public Payload verify(final JWT token) {
         try {
             String tokenValue = token.getBase64EncodedValue();
             Map<String, Object> claims = internalVerify(tokenValue);
@@ -32,19 +31,19 @@ public abstract class JWTVerifier {
         } catch (IOException | GeneralSecurityException | JWTVerifyException ex) {
             throw new InvalidJWTException("Token could not be verified:" + ex.getMessage());
         }
-        
+
     }
-    
-    protected abstract Map<String,Object> internalVerify(final String tokenValue) throws IOException, GeneralSecurityException, JWTVerifyException;
-    
-    private void checkExpiryDate(Map<String, Object> claims){
+
+    protected abstract Map<String, Object> internalVerify(final String tokenValue) throws IOException, GeneralSecurityException, JWTVerifyException;
+
+    private void checkExpiryDate(Map<String, Object> claims) {
         Long expiryDate = (Long) claims.get("exp");
+        if (expiryDate != null) {
             Calendar cal = Calendar.getInstance();
             if (cal.getTimeInMillis() > expiryDate) {
                 throw new ExpiredJWTException("Token has expired");
             }
+        }
     }
-    
-    
 
 }

@@ -18,7 +18,6 @@ public class JWTPrivateKeySigner extends JWTSigner {
     private final com.auth0.jwt.JWTSigner signer;
     
     public JWTPrivateKeySigner(final PrivateKey privateKey){
-        super();
         signer = new com.auth0.jwt.JWTSigner(privateKey);
     }
 

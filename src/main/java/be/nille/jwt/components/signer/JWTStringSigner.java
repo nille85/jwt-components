@@ -15,7 +15,6 @@ public class JWTStringSigner extends JWTSigner {
     private final com.auth0.jwt.JWTSigner signer;
     
     public JWTStringSigner(final String secret){
-        super();
         signer = new com.auth0.jwt.JWTSigner(secret);
     }
 
