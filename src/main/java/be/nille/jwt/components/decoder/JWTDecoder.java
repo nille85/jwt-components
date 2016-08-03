@@ -34,7 +34,9 @@ public class JWTDecoder {
         for(Map.Entry<String,JsonElement> entry : jsonObject.entrySet()){
             String claimName = entry.getKey();
             JsonElement claimValue = entry.getValue();
-            Claim claim = new Claim(claimName, claimValue);
+            Gson gson = new Gson();
+            Object claimObject = gson.fromJson(claimValue, Object.class);
+            Claim claim = new Claim(claimName, claimObject);
             payload.addClaim(claim);
             log.debug(entry.getKey() + ":" + entry.getValue());
         }
