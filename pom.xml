@@ -5,11 +5,14 @@
     <artifactId>jwt-components</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
+    <name>jwt-components</name>
+    <description>Useful components that will enable you to work with JWTs</description>
+    <url>https://github.com/nille85/jwt-components</url>
    
     <properties>
         <java.version>1.7</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>    
         <dependency.lombok.version>1.16.8</dependency.lombok.version>
         <dependency.java-jwt.version>2.2.0</dependency.java-jwt.version>
         <dependency.commons-lang3.version>3.4</dependency.commons-lang3.version>
@@ -21,8 +24,31 @@
         <plugin.maven-compiler-plugin.version>3.5.1</plugin.maven-compiler-plugin.version>
         <plugin.maven-surefire-plugin.version>2.19.1</plugin.maven-surefire-plugin.version>
         <plugin.maven-failsafe-plugin.version>2.19.1</plugin.maven-failsafe-plugin.version>
-        
+        <plugin.maven-source-plugin.version>3.0.1</plugin.maven-source-plugin.version>
+        <plugin.maven-javadoc-plugin.version>2.10.4</plugin.maven-javadoc-plugin.version>           
     </properties>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Niels Holvoet</name>
+            <email>niels@nille.be</email>
+            <organization>Nille</organization>
+            <organizationUrl>http://www.nille.be</organizationUrl>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:git://github.com/nille85/jwt-components.git</connection>
+        <developerConnection>scm:git:ssh://github.com:nille85/jwt-components.git</developerConnection>
+        <url>https://github.com/nille85/jwt-components</url>
+    </scm>
 
     
     <build>
@@ -35,6 +61,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+                
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
 
@@ -87,6 +123,49 @@
                                     <include>**/*IT.java</include>
                                 </includes>
                             </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${plugin.maven-javadoc-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${plugin.maven-source-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.5</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
