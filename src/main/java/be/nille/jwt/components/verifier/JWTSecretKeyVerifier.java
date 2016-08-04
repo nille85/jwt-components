@@ -13,11 +13,11 @@ import java.util.Map;
 /**
  * @author nholvoet
  */
-public class JWTStringVerifier extends JWTVerifier {
+public class JWTSecretKeyVerifier extends JWTVerifier {
 
     private final com.auth0.jwt.JWTVerifier verifier;
     
-    public JWTStringVerifier(final String secret){
+    public JWTSecretKeyVerifier(final String secret){
         verifier = new com.auth0.jwt.JWTVerifier(secret);
     }
     

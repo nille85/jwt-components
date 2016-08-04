@@ -17,14 +17,14 @@ import org.junit.Test;
  * @author nholvoet
  */
 @Slf4j
-public class JWTStringSignerTest {
+public class JWTSecretKeySignerTest {
 
-    private JWTStringSigner signer;
+    private JWTSecretKeySigner signer;
 
     @Before
     public void setup() {
         
-        signer = new JWTStringSigner("asecret");
+        signer = new JWTSecretKeySigner("asecret");
     }
 
     @Test

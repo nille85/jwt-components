@@ -10,11 +10,11 @@ import java.util.Map;
 /**
  * @author nholvoet
  */
-public class JWTStringSigner extends JWTSigner {
+public class JWTSecretKeySigner extends JWTSigner {
 
     private final com.auth0.jwt.JWTSigner signer;
     
-    public JWTStringSigner(final String secret){
+    public JWTSecretKeySigner(final String secret){
         signer = new com.auth0.jwt.JWTSigner(secret);
     }
 

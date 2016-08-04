@@ -11,8 +11,9 @@ import be.nille.jwt.components.model.Payload;
 import be.nille.jwt.components.model.JWT;
 import be.nille.jwt.components.model.Claim;
 import be.nille.jwt.components.signer.JWTSigner;
-import be.nille.jwt.components.signer.JWTStringSigner;
+import be.nille.jwt.components.signer.JWTSecretKeySigner;
 import lombok.extern.slf4j.Slf4j;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,16 +33,18 @@ public class JWTDecoderTest {
     
     @Test
     public void decode(){
-        Payload store = new Payload();
+        Payload payload = new Payload();
         Claim claim1 = new Claim("iss", "Nille");
-        store.addClaim(claim1);
+        payload.addClaim(claim1);
         Claim claim2 = new Claim("sub", "Token");
-        store.addClaim(claim2);
-        JWTSigner signer = new JWTStringSigner("asecret");
-        JWT token = signer.sign(store);
+        payload.addClaim(claim2);
+        JWTSigner signer = new JWTSecretKeySigner("asecret");
+        JWT token = signer.sign(payload);
         String tokenToDecode = token.getBase64EncodedValue();
-        Payload claimStore = decoder.decode(tokenToDecode);
-        assertTrue(claimStore.getClaims().size() == 2);
+        Payload decodedPayload = decoder.decode(tokenToDecode);
+        assertTrue(decodedPayload.getClaims().size() == 2);
+        assertEquals("Nille", decodedPayload.getClaim("iss").getValue());
+        assertEquals("Token", decodedPayload.getClaim("sub").getValue());
     }
     
     @Test(expected = InvalidJWTException.class)
