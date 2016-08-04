@@ -15,7 +15,7 @@ In order to create a JWTSigner, you have to provide it with a secret. The secret
 
 You can use it in the following way:
 ```java
-JWTSigner signer = JWTStringSigner("myveryverysecret");
+JWTSigner signer = JWTSecretKeySigner("myveryverysecret");
 Payload payload = Payload.builder()
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
@@ -29,7 +29,7 @@ The JWTVerifier contains the method verify. It takes a Signed JWT as input and t
 
 You can use it in the following way:
 ```java
-JWTVerifier verifier = new JWTStringVerifier("myveryverysecret");
+JWTVerifier verifier = new JWTSecretKeyVerifier("myveryverysecret");
 Payload verifiedPayload = verifier.verify(jwt);
 Set<Claim> claims = verifiedPayload.getClaims();
 ```
