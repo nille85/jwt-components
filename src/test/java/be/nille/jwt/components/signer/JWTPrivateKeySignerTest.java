@@ -59,7 +59,7 @@ public class JWTPrivateKeySignerTest {
     }
     
     @Test
-    public void testSignWithExpirationMultipleTimes() {
+    public void testSignWithExpirationMultipleTimes() throws InterruptedException {
         Payload payload = Payload.builder()
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
@@ -68,7 +68,7 @@ public class JWTPrivateKeySignerTest {
         JWT jwt1 = signer.sign(payload);
         assertNotNull(jwt1);
         log.debug(jwt1.getBase64EncodedValue());
-        
+        Thread.sleep(10L);
         payload = Payload.builder()
                 .withClaim("iss", "Nille")
                 .withClaim("sub", "Token")
