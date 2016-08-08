@@ -1,4 +1,17 @@
 <settings>
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gpg.executable>gpg2</gpg.executable>
+                <gpg.keyname>FEA84577</gpg.keyname>
+                <gpg.passphrase>${GPG_PASS}</gpg.passphrase>
+            </properties>
+        </profile>
+    </profiles>
     <servers>
         <server>
             <id>ossrh</id>
