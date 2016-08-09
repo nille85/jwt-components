@@ -35,7 +35,6 @@ Payload verifiedPayload = verifier.verify(jwt);
 Set<Claim> claims = verifiedPayload.getClaims();
 ```
 
-
 ### JWTDecoder
 
 The JWTDecoders decode method requires a base64 encoded String value as input. It decoded it and returns a JWT Object.
